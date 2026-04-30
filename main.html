@@ -2,7 +2,8 @@
 <html lang="pl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<meta name="format-detection" content="telephone=no">
 <title>Portfolio — Wizytówka</title>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
 <style>
@@ -13,7 +14,7 @@
     --dark-bg: #ffffff;
     --dark-card: rgba(14, 17, 15, 0.72);
     --glass: rgba(255,255,255,0.045);
-    --glass-border: rgba(0, 0, 0, 0.18);
+    --glass-border: rgba(0, 0, 0, 0.454);
     --text-primary: #f0ead8;
     --text-dim: #000000;
     --fog: rgba(0, 0, 0, 0.06);
@@ -69,6 +70,8 @@
     justify-content: flex-end;
     padding-bottom: 64px;
     position: relative;
+    padding-top: 110px; /* gwarantuje miejsce na hero-top + oddech */
+@media (max-width: 600px) { .hero { padding-top: 120px; } }
   }
 
   .hero-top {
@@ -138,7 +141,7 @@
     border-radius: 26px;
     overflow: hidden;
     border: 1px solid var(--glass-border);
-    background: rgba(255,255,255,0.03);
+    background: rgba(255, 255, 255, 0.03);
     box-shadow: 0 0 38px rgba(0, 0, 0, 0.18);
     opacity: 0;
     animation: fadeUp 1.4s 0.9s forwards;
@@ -476,13 +479,13 @@
   /* ── NAV (floating) ── */
   .nav {
     position: fixed;
-    bottom: 30px;
-    left: 72%;
+    top: 65px;
+    left: 55%;
     transform: translateX(-50%);
     z-index: 100;
     display: flex;
     gap: 2px;
-    background: rgba(10, 12, 11, 0.82);
+    background: rgba(69, 68, 68, 0.299);
     border: 1px solid var(--glass-border);
     backdrop-filter: blur(24px);
     padding: 6px 8px;
@@ -553,12 +556,117 @@
   }
 
   /* ── RESPONSIVE ── */
+  /* Małe tablety i Surface */
+  @media (max-width: 1100px) {
+    .nav { left: 50%; }
+  }
+
+  /* Tablet */
+  @media (max-width: 900px) {
+    .page { padding: 0 20px 100px; }
+    .hero-name { font-size: clamp(2.8rem, 8vw, 5rem); }
+    .hero-tagline { font-size: 1.1rem; }
+    .card { padding: 32px 28px; }
+    .project-card { gap: 20px; }
+    .nav { left: 50%; }
+  }
+
+  /* Duży telefon / mały tablet */
   @media (max-width: 600px) {
+    .page { padding: 0 16px 80px; }
+    .hero { padding-bottom: 48px; }
+    .hero-top { 
+      flex-direction: column; 
+      align-items: flex-start; 
+      gap: 8px;
+      top: 20px;
+    }
+    .hero-name { font-size: clamp(2.4rem, 12vw, 3.8rem); }
+    .hero-tagline { font-size: 1rem; }
+    .hero-photo { width: min(200px, 100%); }
+    .hero-cta { 
+      flex-direction: column; 
+      gap: 12px; 
+    }
+    .btn { 
+      width: 100%; 
+      text-align: center;
+      padding: 14px 24px;
+    }
+    .divider { margin: 56px 0 40px; }
+    .section-title { font-size: 1.5rem; }
+    .card { 
+      padding: 24px 20px; 
+      margin-bottom: 16px;
+    }
     .project-card { grid-template-columns: 1fr; }
-    .project-year { font-size: 1.4rem; }
-    .skills-grid { grid-template-columns: 1fr 1fr; }
-    .card { padding: 28px 24px; }
-    .nav-item { padding: 10px 12px; font-size: 9px; }
+    .project-year { 
+      font-size: 1.2rem; 
+      order: -1;
+    }
+    .skills-grid { 
+      grid-template-columns: 1fr 1fr; 
+      gap: 12px;
+    }
+    .skill-item { padding: 16px 14px; }
+    .skill-name { font-size: 10px; }
+    .skill-desc { font-size: 0.75rem; }
+    .contact-link { padding: 16px 0; }
+    .contact-link-label { font-size: 0.8rem; }
+    .contact-link-value { font-size: 0.85rem; }
+    .footer { 
+      flex-direction: column; 
+      gap: 12px; 
+      text-align: center;
+    }
+    .nav { 
+      bottom: 20px; 
+      padding: 6px;
+      gap: 0;
+    }
+    .nav-item { 
+      padding: 8px 10px; 
+      font-size: 8px; 
+    }
+  }
+
+  /* Mały telefon */
+  @media (max-width: 400px) {
+    .page { padding: 0 12px 60px; }
+    .hero-name { font-size: 2.2rem; }
+    .hero-tagline { font-size: 0.95rem; }
+    .skills-grid { grid-template-columns: 1fr; }
+    .card { padding: 20px 16px; }
+    .tag { font-size: 9px; padding: 3px 10px; }
+  }
+
+  /* Bardzo mały telefon */
+  @media (max-width: 320px) {
+    .hero-name { font-size: 2rem; }
+    .hero-photo { width: 100%; max-width: 180px; }
+    .nav-item { padding: 8px 6px; font-size: 7px; }
+  }
+
+  /* Orientacja pozioma na telefonie */
+  @media (max-height: 500px) and (orientation: landscape) {
+    .hero { 
+      min-height: auto; 
+      padding: 60px 0 40px; 
+    }
+    .hero-photo { 
+      width: 120px; 
+      position: absolute;
+      right: 24px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+    .hero-name { font-size: 2rem; }
+    .hero-tagline { max-width: 60%; }
+  }
+
+  /* Wysokie ekrany */
+  @media (min-height: 1000px) {
+    .hero { padding-bottom: 100px; }
   }
 </style>
 </head>
@@ -591,7 +699,7 @@
       Tworzę strony internetowe, portfolia i identyfikacje wizualne dla marek, które chcą się wyróżnić.
     </p>
     <div class="hero-photo">
-      <img src="https://github.com/KDYBTW/bigadamsky/blob/main/zdjecie.jpeg?raw=true" alt="">
+      <img src="zdjecie.jpeg" alt="">
     </div>
     <div class="hero-cta">
       <a class="btn btn-primary" href="#projects">Zobacz projekty</a>
@@ -885,6 +993,7 @@ document.querySelectorAll('.btn, .nav-item').forEach(el => {
     }
   });
 });
+    
 </script>
 </body>
 </html>
